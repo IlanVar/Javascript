@@ -1,6 +1,8 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
+
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -11,7 +13,7 @@ var particles = []
 function feedParticle(x,y) {
     let min = 0; 
 let max = 20;
-for (let index = 0; index < 100; index++) {
+for (let index = 0; index < 75; index++) {
     particles.push([[x,y], [(Math.random() * (max - min) + min)/10-1, (Math.random() * (max - min) + min)/10-1], 10])            
 }
 }
@@ -28,9 +30,10 @@ function draw() {
 
         particles.forEach(particle => {
             
-            particle[0][0] += particle[1][0]
-            particle[0][1] += particle[1][1]
-            particle[2] -= 0.05
+            particle[0][0] += particle[1][0]*2.5
+            particle[0][1] += particle[1][1]*2.5
+            particle[1][1] += 0.03
+            particle[2] -= 0.1
 
             if (particle[2] >= 0) {
             ctx.beginPath();
@@ -48,6 +51,9 @@ function draw() {
 
     }
     draw_particle()
+    ctx.font = '50px arial';
+    ctx.fillStyle = "#EDF5E1";
+    ctx.fillText("CLICK", (innerWidth/2)-50,(innerHeight/2)-25);
 }
 
 draw()
