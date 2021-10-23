@@ -10,11 +10,11 @@ var x = innerWidth/2;
 var y = innerHeight/2;
 var particles = []
 
-function feedParticle(x,y) {
+function feedParticle(x,y,color) {
     let min = 0; 
 let max = 20;
 for (let index = 0; index < 75; index++) {
-    particles.push([[x,y], [(Math.random() * (max - min) + min)/10-1, (Math.random() * (max - min) + min)/10-1], 10])            
+    particles.push([[x,y], [(Math.random() * (max - min) + min)/10-1, (Math.random() * (max - min) + min)/10-1], 10, color])            
 }
 }
 
@@ -37,12 +37,12 @@ function draw() {
 
             if (particle[2] >= 0) {
             ctx.beginPath();
-            ctx.fillStyle = "#EDF5E1"
+
+            ctx.fillStyle = `rgb(${particle[3]})`
             ctx.arc(particle[0][0],particle[0][1],particle[2],0,2*Math.PI)
             ctx.fill()
             }
 
-            console.log(particle[2]);
             if (particle[2] <= 0) {
                 particles.shift()
             }
@@ -59,8 +59,12 @@ function draw() {
 draw()
 
 canvas.addEventListener('click',function(e){
-    x = e.clientX
-    y = e.clientY
-    feedParticle(x,y)
+    let x = e.clientX
+    let y = e.clientY
+    let r = (Math.random() * (255 - 0) + 0)
+    let g = (Math.random() * (255 - 0) + 0)
+    let b = (Math.random() * (255 - 0) + 0)
+    color = [r,g,b]
+    feedParticle(x,y,color)
 })
 
