@@ -86,10 +86,22 @@ canvas.addEventListener('mouseup',function() {
     isDraw = false
 })
 
-canvas.addEventListener('touchstart',function(e){
+// canvas.addEventListener('touchstart',function(e){
+//     click = false
+//     x = e.touches[0].clientX
+//     y = e.touches[0].clientY
+//     color ++
+//     feedParticle(x,y,color)
+// });
+
+canvas.addEventListener('touchstart',function(){
+    isDraw = true
+    canvas.addEventListener('touchmove',function(e){
     click = false
     x = e.touches[0].clientX
     y = e.touches[0].clientY
     color ++
-    feedParticle(x,y,color)
+    if (isDraw == true){
+    feedParticle(x,y,color)}
 });
+})
