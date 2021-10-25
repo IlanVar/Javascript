@@ -11,15 +11,8 @@ var y = 0;
 var particles = []
 var click = true
 var isDraw = false
-
 var color = 0
-
-function feedParticle(x,y,color) {
-    let min = 0; 
-let max = 20;
-particles.push([[x,y], [(Math.random() * (max - min) + min)/10-1, (Math.random() * (max - min) + min)/10-1], 10, color,0.5, true])            
-
-}
+var nbrParticle = 0
 
 function draw() {
     
@@ -45,7 +38,7 @@ function draw() {
             if (particle[2] >= 0) {
             ctx.beginPath();
             ctx.fillStyle = `hsl(${particle[3]}, 80%, 70%)`
-            particle[3] += 3
+            
             ctx.arc(particle[0][0],particle[0][1],particle[2],0,2*Math.PI)
             ctx.fill()
             }
@@ -69,14 +62,26 @@ function draw() {
 
     draw_particle()
 
-if (click == true) {
-    ctx.font = '30px arial';
-    ctx.fillStyle = "#EDF5E1";
-    ctx.fillText("CLICK and DRAG", (innerWidth/2)-110,(innerHeight/2)+15);
+    nbrParticle = particles.length
+    ctx.font = '15px arial';
+        ctx.fillStyle = "#EDF5E1";
+        ctx.fillText("Nombre de particules : " + nbrParticle, 20,20)
+
+    if (click == true) {
+        ctx.font = '30px arial';
+        ctx.fillStyle = "#EDF5E1";
+        ctx.fillText("CLICK and DRAG", (innerWidth/2)-10,(innerHeight/2)+15);
 }
 }
 
 draw()
+
+function feedParticle(x,y,color) {
+    let min = 0; 
+let max = 20;
+particles.push([[x,y], [(Math.random() * (max - min) + min)/10-1, (Math.random() * (max - min) + min)/10-1], 10, color,0.5, true])            
+
+}
 
 canvas.addEventListener('mousedown',function(){
     isDraw = true
