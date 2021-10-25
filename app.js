@@ -106,7 +106,7 @@ canvas.addEventListener('touchstart',function(){
     x = e.touches[0].clientX
     y = e.touches[0].clientY
     color ++
-    if (isDraw == true){
+    if (isDraw == true && nbrParticle < 650){
     feedParticle(x,y,color)}
 });
 })
