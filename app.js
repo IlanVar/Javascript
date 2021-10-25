@@ -88,8 +88,8 @@ canvas.addEventListener('mouseup',function() {
 
 canvas.addEventListener('touchstart',function(e){
     click = false
-    x = e.clientX
-    y = e.clientY
+    x = e.touches[0].clientX
+    y = e.touches[0].clientY
     color ++
     feedParticle(x,y,color)
 });
