@@ -17,7 +17,7 @@ var color = 0
 function feedParticle(x,y,color) {
     let min = 0; 
 let max = 20;
-for (let index = 0; index < 40; index++) {
+for (let index = 0; index < 10; index++) {
     particles.push([[x,y], [(Math.random() * (max - min) + min)/10-1, (Math.random() * (max - min) + min)/10-1], 10, color])            
 }
 }
@@ -47,7 +47,7 @@ function draw() {
             if (particle[2] <= 0) {
                 particles.shift()
             }
-
+            if(particle[0][1]>=innerHeight){particle[1][1]=-2}
         }); 
 
     }
@@ -86,11 +86,10 @@ canvas.addEventListener('mouseup',function() {
     isDraw = false
 })
 
-canvas.addEventListener('touchmove',function(e){
+canvas.addEventListener('touchstart',function(e){
     click = false
     x = e.clientX
     y = e.clientY
     color ++
     feedParticle(x,y,color)
 });
-
