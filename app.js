@@ -70,7 +70,7 @@ function draw() {
     if (click == true) {
         ctx.font = '30px arial';
         ctx.fillStyle = "#EDF5E1";
-        ctx.fillText("CLICK and DRAG", (innerWidth/2)-10,(innerHeight/2)+15);
+        ctx.fillText("CLICK and DRAG", (innerWidth/2)-150,(innerHeight/2)+15);
 }
 }
 
@@ -79,7 +79,7 @@ draw()
 function feedParticle(x,y,color) {
     let min = 0; 
 let max = 20;
-particles.push([[x,y], [(Math.random() * (max - min) + min)/10-1, (Math.random() * (max - min) + min)/10-1], 10, color,0.5, true])            
+particles.push([[x,y], [(Math.random() * (max - min) + min)/10-1, (Math.random() * (max - min) + min)/10-1], 20, color,0.5, true])            
 
 }
 
@@ -90,7 +90,7 @@ canvas.addEventListener('mousedown',function(){
     x = e.clientX
     y = e.clientY
     color ++
-    if (isDraw == true){
+    if (isDraw == true && nbrParticle < 1000){
     feedParticle(x,y,color)}
 });
 })
