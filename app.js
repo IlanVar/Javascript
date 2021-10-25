@@ -90,7 +90,7 @@ canvas.addEventListener('mousedown',function(){
     x = e.clientX
     y = e.clientY
     color ++
-    if (isDraw == true && nbrParticle < 1000){
+    if (isDraw == true && nbrParticle < 650){
     feedParticle(x,y,color)}
 });
 })
