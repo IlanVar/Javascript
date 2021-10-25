@@ -17,7 +17,7 @@ var color = 0
 function feedParticle(x,y,color) {
     let min = 0; 
 let max = 20;
-particles.push([[x,y], [(Math.random() * (max - min) + min)/10-1, (Math.random() * (max - min) + min)/10-1], 10, color])            
+particles.push([[x,y], [(Math.random() * (max - min) + min)/10-1, (Math.random() * (max - min) + min)/10-1], 10, color,0.5, true])            
 
 }
 
@@ -28,17 +28,24 @@ function draw() {
 
     function draw_particle() {
 
+        
         particles.forEach(particle => {
             
             particle[0][0] += particle[1][0]*2
             particle[0][1] += particle[1][1]*2
             particle[1][1] += 0.06
-            particle[2] -= 0.1
+            if(particle[5]==true){
+                particle[4] += 0.01
+            }
+            else{
+                particle[4] -= 0.005
+            }
+            particle[2] -= 0.05
 
             if (particle[2] >= 0) {
             ctx.beginPath();
             ctx.fillStyle = `hsl(${particle[3]}, 80%, 70%)`
-            particle[3]+=3
+            particle[3] += 3
             ctx.arc(particle[0][0],particle[0][1],particle[2],0,2*Math.PI)
             ctx.fill()
             }
@@ -46,29 +53,30 @@ function draw() {
             if (particle[2] <= 0) {
                 particles.shift()
             }
-            if(particle[0][1]>=innerHeight){particle[1][1]=-2}
-            if(particle[0][0]>=innerWidth){particle[1][0]=-1}
+            if(particle[0][1]>=innerHeight-particle[2]){
+                particle[1][1]=-2*particle[4];
+                particle[5] = false
+            }
+            if(particle[4]<=0){
+                particle[1][1]=0
+            }
+            if(particle[0][0]>=innerWidth-particle[2]){particle[1][0]=particle[1][0]*-1}
+            if(particle[0][0]<=0+particle[2]){particle[1][0]=particle[1][0]*-1}
+
         }); 
 
     }
 
     draw_particle()
-    
-
-  
-
 
 if (click == true) {
-    ctx.font = '50px arial';
+    ctx.font = '30px arial';
     ctx.fillStyle = "#EDF5E1";
-    ctx.fillText("CLICK", (innerWidth/2)-50,(innerHeight/2)-25);
+    ctx.fillText("CLICK and DRAG", (innerWidth/2)-110,(innerHeight/2)+15);
 }
 }
 
 draw()
-
-
-
 
 canvas.addEventListener('mousedown',function(){
     isDraw = true
@@ -85,14 +93,6 @@ canvas.addEventListener('mousedown',function(){
 canvas.addEventListener('mouseup',function() {
     isDraw = false
 })
-
-// canvas.addEventListener('touchstart',function(e){
-//     click = false
-//     x = e.touches[0].clientX
-//     y = e.touches[0].clientY
-//     color ++
-//     feedParticle(x,y,color)
-// });
 
 canvas.addEventListener('touchstart',function(){
     isDraw = true
