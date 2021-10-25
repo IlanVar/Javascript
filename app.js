@@ -17,9 +17,8 @@ var color = 0
 function feedParticle(x,y,color) {
     let min = 0; 
 let max = 20;
-for (let index = 0; index < 10; index++) {
-    particles.push([[x,y], [(Math.random() * (max - min) + min)/10-1, (Math.random() * (max - min) + min)/10-1], 10, color])            
-}
+particles.push([[x,y], [(Math.random() * (max - min) + min)/10-1, (Math.random() * (max - min) + min)/10-1], 10, color])            
+
 }
 
 function draw() {
@@ -33,7 +32,7 @@ function draw() {
             
             particle[0][0] += particle[1][0]*2
             particle[0][1] += particle[1][1]*2
-            particle[1][1] += 0.03
+            particle[1][1] += 0.06
             particle[2] -= 0.1
 
             if (particle[2] >= 0) {
