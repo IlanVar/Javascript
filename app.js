@@ -86,3 +86,11 @@ canvas.addEventListener('mouseup',function() {
     isDraw = false
 })
 
+canvas.addEventListener('touchmove',function(e){
+    click = false
+    x = e.clientX
+    y = e.clientY
+    color ++
+    feedParticle(x,y,color)
+});
+
