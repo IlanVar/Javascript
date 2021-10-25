@@ -47,6 +47,7 @@ function draw() {
                 particles.shift()
             }
             if(particle[0][1]>=innerHeight){particle[1][1]=-2}
+            if(particle[0][0]>=innerWidth){particle[1][0]=-1}
         }); 
 
     }
