@@ -6,6 +6,12 @@ var ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+var fps = 60;
+var now;
+var then = Date.now();
+var interval = 1000/fps;
+var delta;
+
 var x = 0;
 var y = 0;
 var particles = []
@@ -17,10 +23,18 @@ var nbrParticle = 0
 function draw() {
     
     requestAnimationFrame(draw);
-    ctx.clearRect(0,0,innerWidth,innerHeight);
+    
 
+    	
+	now = Date.now();
+	delta = now - then;
+	//console.log(delta);
+	
+	if (delta > interval) {
+		
+		then = now - (delta % interval);
+        ctx.clearRect(0,0,innerWidth,innerHeight);
     function draw_particle() {
-
         
         particles.forEach(particle => {
             
@@ -73,6 +87,7 @@ function draw() {
         ctx.fillText("CLICK and DRAG", (innerWidth/2)-150,(innerHeight/2)+15);
 }
 }
+}
 
 draw()
 
@@ -90,7 +105,7 @@ canvas.addEventListener('mousedown',function(){
     x = e.clientX
     y = e.clientY
     color ++
-    if (isDraw == true && nbrParticle < 650){
+    if (isDraw == true && nbrParticle < 1000){
     feedParticle(x,y,color)}
 });
 })
@@ -106,7 +121,7 @@ canvas.addEventListener('touchstart',function(){
     x = e.touches[0].clientX
     y = e.touches[0].clientY
     color ++
-    if (isDraw == true && nbrParticle < 650){
-    feedParticle(x,y,color)}
+    if (isDraw == true && nbrParticle < 700){
+        feedParticle(x,y,color)}
 });
 })
